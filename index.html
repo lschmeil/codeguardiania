@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeGuardian IA - Detector de Code Smells</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <!-- Custom CSS -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --primary-dark: #4338ca;
+            --secondary: #10b981;
+            --secondary-light: #34d399;
+            --secondary-dark: #059669;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-color: var(--gray-50);
+        }
+
+        .container {
+            max-width: 1280px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-400);
+        }
+
+        /* Tooltip styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--gray-800);
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+
+</head>
+<body class="text-gray-800 font-sans">
+
+    <!-- Navbar Placeholder -->
+    <nav class="bg-white shadow-md py-4 px-6 mb-12">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-indigo-700">CodeGuardian IA</h1>
+            <div>
+                <a href="#" class="text-gray-700 hover:text-indigo-600 px-4">Home</a>
+                <a href="#" class="text-gray-700 hover:text-indigo-600 px-4">Funcionalidades</a>
+                <a href="#" class="text-gray-700 hover:text-indigo-600 px-4">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-12">
+        <section class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-indigo-700">CodeGuardian IA</h1>
+            <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
+                Seu detetive particular para encontrar e corrigir code smells automaticamente usando inteligência artificial
+            </p>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="text-indigo-600 mb-4">
+                    <i data-feather="search" class="w-12 h-12"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Detecção Inteligente</h3>
+                <p class="text-gray-600">Nossa IA identifica code smells como métodos longos, duplicação de código e complexidade excessiva.</p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="text-indigo-600 mb-4">
+                    <i data-feather="refresh-cw" class="w-12 h-12"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Sugestões de Refatoração</h3>
+                <p class="text-gray-600">Receba recomendações personalizadas para melhorar a qualidade do seu código automaticamente.</p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
+                <div class="text-indigo-600 mb-4">
+                    <i data-feather="trending-up" class="w-12 h-12"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-3">Métricas de Qualidade</h3>
+                <p class="text-gray-600">Acompanhe a evolução da qualidade do seu código com métricas objetivas e relatórios detalhados.</p>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-md p-8 mb-16">
+            <h2 class="text-2xl font-bold mb-6 text-indigo-700">Experimente Agora</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <div class="bg-gray-100 rounded-lg p-4 h-64 flex items-center justify-center">
+                        <p class="text-gray-500">Insira seu código aqui ou faça upload de um arquivo</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Resultados da Análise</h3>
+                    <div class="bg-gray-100 rounded-lg p-4 h-64 flex items-center justify-center">
+                        <p class="text-gray-500">Os resultados da análise aparecerão aqui</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 flex flex-col sm:flex-row gap-4">
+                <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                    Analisar Código
+                </button>
+                <button class="border border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-6 py-3 rounded-lg font-medium transition-colors">
+                    Upload de Arquivo
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <footer class="bg-white shadow-md py-6 mt-12 text-center">
+        <p class="text-gray-500">&copy; 2025 CodeGuardian IA. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Feather Icons Init -->
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>
